@@ -1,0 +1,28 @@
+{
+  "name": "cineplex-showtimes",
+  "version": "1.0.0",
+  "description": "Cineplex showtime aggregator with popularity ranking",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "start": "npm run start --workspace=backend",
+    "backend": "npm run dev --workspace=backend",
+    "frontend": "npm run dev --workspace=frontend"
+  },
+  "keywords": [
+    "cineplex",
+    "movies",
+    "showtimes",
+    "aggregator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

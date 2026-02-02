@@ -1,0 +1,128 @@
+.theatre-list-container {
+  margin-bottom: 1.5rem;
+}
+
+.theatre-list-toggle {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theatre-list-toggle:hover {
+  background: #334155;
+  border-color: #475569;
+}
+
+.toggle-icon {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.theatre-list {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: slideDown 0.3s ease;
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: #0f172a;
+  border-radius: 8px;
+  border: 1px solid #334155;
+}
+
+.theatre-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.theatre-list::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+.theatre-list::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+.theatre-list::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.theatre-item {
+  padding: 0.75rem 0.875rem;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.theatre-item:hover {
+  background: #27374d;
+  border-color: #475569;
+}
+
+.theatre-main-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.375rem;
+}
+
+.theatre-item-name {
+  font-weight: 600;
+  color: #f1f5f9;
+  flex: 1;
+  font-size: 0.875rem;
+}
+
+.theatre-distance {
+  font-size: 0.75rem;
+  color: #60a5fa;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0.25rem 0.625rem;
+  background: rgba(59, 130, 246, 0.15);
+  border-radius: 12px;
+}
+
+.theatre-address {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .theatre-main-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+  }
+
+  .theatre-distance {
+    align-self: flex-end;
+  }
+}

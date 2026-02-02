@@ -1,0 +1,414 @@
+.movie-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover {
+  border-color: #475569;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.movie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  gap: 1.5rem;
+}
+
+.movie-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.movie-poster {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid #334155;
+}
+
+.movie-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.movie-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.movie-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  flex-wrap: wrap;
+}
+
+.showings-count {
+  color: #60a5fa;
+}
+
+.movie-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.occupancy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 180px;
+}
+
+.occupancy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.occupancy-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.occupancy-percentage {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.occupancy-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.occupancy-bar {
+  flex: 1;
+  height: 8px;
+  background: #334155;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.occupancy-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease, background-color 0.3s ease;
+}
+
+.busyness-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.seats-info {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.seats-booked {
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.seats-separator {
+  color: #64748b;
+}
+
+.seats-total {
+  color: #94a3b8;
+}
+
+.no-occupancy-data {
+  padding: 0.75rem 0;
+  text-align: center;
+}
+
+.no-occupancy-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  text-align: right;
+}
+
+.estimated-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.expand-btn {
+  background: #334155;
+  border: none;
+  font-size: 1rem;
+  color: #94a3b8;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expand-btn:hover {
+  background: #475569;
+  color: #f1f5f9;
+}
+
+.movie-showtimes {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  border-top: 1px solid #334155;
+  animation: slideDown 0.3s ease;
+  background: #0f172a;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.no-showtimes {
+  padding: 2rem;
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+}
+
+.theatre-section {
+  margin-top: 1.25rem;
+}
+
+.theatre-section:first-child {
+  margin-top: 1rem;
+}
+
+.theatre-name {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.sessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.session-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.session-card:hover {
+  border-color: #475569;
+  background: #27374d;
+}
+
+.session-card.sold-out-session {
+  opacity: 0.6;
+  border-color: #7f1d1d;
+  background: #1e1b1b;
+}
+
+.session-time {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.session-time strong {
+  font-size: 1.125rem;
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+.session-date {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.session-experiences {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.session-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.auditorium {
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 0.8125rem;
+}
+
+.seat-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.seat-occupancy-bar {
+  width: 100%;
+  height: 6px;
+  background: #334155;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.seat-occupancy-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease, background-color 0.3s ease;
+}
+
+.seat-occupancy-fill.estimated {
+  opacity: 0.6;
+}
+
+.seat-count {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.seat-count.estimated {
+  font-style: italic;
+  color: #94a3b8;
+}
+
+.seat-count .booked {
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.seat-count .separator {
+  color: #64748b;
+}
+
+.seat-count .total {
+  color: #94a3b8;
+}
+
+.seat-count .percent {
+  color: #64748b;
+  font-size: 0.8125rem;
+}
+
+.sold-out-text {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.seats-left {
+  color: #cbd5e1;
+}
+
+.seats {
+  font-weight: 500;
+  color: #cbd5e1;
+}
+
+.seats.sold-out {
+  color: #ef4444;
+}
+
+.seat-map-link {
+  display: inline-block;
+  color: #f1f5f9;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.625rem 1rem;
+  background: #3b82f6;
+  border-radius: 6px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.seat-map-link:hover {
+  background: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .movie-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .movie-status {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .occupancy-section {
+    min-width: 100%;
+  }
+
+  .expand-btn {
+    align-self: flex-end;
+  }
+
+  .sessions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-poster {
+    width: 50px;
+    height: 75px;
+  }
+
+  .movie-title {
+    font-size: 1.125rem;
+  }
+}
