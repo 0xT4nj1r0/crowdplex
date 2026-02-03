@@ -131,6 +131,37 @@ Status codes:
 - Rate limiting prevents abuse
 - Input validation on all parameters
 
+## Vercel Web Analytics
+
+This backend is configured to support Vercel Web Analytics for monitoring deployment performance and API usage.
+
+### Enabling Web Analytics
+
+1. **Enable in Vercel Dashboard**
+   - Go to your [Vercel dashboard](https://vercel.com/dashboard)
+   - Select your project
+   - Click the **Analytics** tab
+   - Click **Enable** to activate Web Analytics
+
+2. **Configuration**
+   - The `vercel.json` is pre-configured to allow Vercel's analytics routes (`/_vercel/insights/*`)
+   - No additional packages or code changes are required for backend APIs
+   - Analytics data will be available after your next deployment
+
+3. **Viewing Analytics Data**
+   - Once enabled and deployed, visit your project's Analytics tab in the Vercel dashboard
+   - View metrics including:
+     - Request volume and patterns
+     - Response times and performance
+     - Error rates and status codes
+     - Geographic distribution of requests
+
+### Notes
+
+- **Backend APIs**: Vercel Web Analytics for backend services focuses on deployment and API performance metrics
+- **Frontend Analytics**: For user-facing analytics (page views, user interactions), implement `@vercel/analytics` in the frontend application
+- **Privacy**: Vercel Web Analytics is compliant with privacy standards. See [Vercel's privacy policy](https://vercel.com/docs/analytics/privacy-policy)
+
 ## Development
 
 The server uses Node's `--watch` flag for auto-reloading during development.
