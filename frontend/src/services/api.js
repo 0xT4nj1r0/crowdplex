@@ -2,7 +2,8 @@
  * API Service for communicating with the backend proxy
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5174';
+// Remove trailing slash if present
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5174').replace(/\/$/, '');
 
 /**
  * Generic fetch wrapper with error handling

@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.BACKEND_PORT || 5174;
 const API_KEY = process.env.CINEPLEX_API_KEY;
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 // Validate API key
 if (!API_KEY) {
@@ -18,8 +19,32 @@ if (!API_KEY) {
   process.exit(1);
 }
 
+// CORS configuration - only allow your frontend
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      FRONTEND_URL,
+      'https://crowdplex.vercel.app',
+      'https://crowdplex-git-main-0xt4nj1r0s-projects.vercel.app', // Vercel preview deployments
+    ];
+    
+    if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Apply rate limiting to API routes
