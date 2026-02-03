@@ -179,7 +179,8 @@ app.get('/api/theatres', rateLimiter, async (req, res) => {
     const data = await response.json();
 
     // Cache for 6 hours (theatres don't change)
-    cache.set(cacheKey, data, 6 * 60 * 60 * 1000);
+    res.set('Cache-Control', 'public, max-age=21600, s-maxage=21600'); // 6 hours
+    // cache.set(cacheKey, data, 6 * 60 * 60 * 1000);
 
     res.json(data);
 
@@ -266,7 +267,8 @@ app.get('/api/showtimes', rateLimiter, async (req, res) => {
     };
 
     // Cache for 1 hour (showtimes are static for the day)
-    cache.set(cacheKey, cachedResponse, 60 * 60 * 1000);
+    res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600'); // 1 hour
+    // cache.set(cacheKey, cachedResponse, 60 * 60 * 1000);
 
     res.json(cachedResponse);
 
@@ -345,7 +347,8 @@ app.get('/api/seat-availability', rateLimiter, async (req, res) => {
     };
 
     // Cache for 1 hour (seat availability doesn't need real-time updates)
-    cache.set(cacheKey, enrichedData, 60 * 60 * 1000);
+    res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600'); // 1 hour
+    // cache.set(cacheKey, enrichedData, 60 * 60 * 1000);
 
     res.json(enrichedData);
 
