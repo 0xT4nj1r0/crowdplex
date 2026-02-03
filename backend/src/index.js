@@ -178,8 +178,8 @@ app.get('/api/theatres', rateLimiter, async (req, res) => {
 
     const data = await response.json();
 
-    // Cache for 5 minutes (theatres don't change frequently)
-    cache.set(cacheKey, data, 5 * 60 * 1000);
+    // Cache for 6 hours (theatres don't change)
+    cache.set(cacheKey, data, 6 * 60 * 60 * 1000);
 
     res.json(data);
 
@@ -259,10 +259,16 @@ app.get('/api/showtimes', rateLimiter, async (req, res) => {
 
     const data = await response.json();
 
-    // Cache for 2 minutes (showtimes change more frequently)
-    cache.set(cacheKey, data, 2 * 60 * 1000);
+    // Add cache timestamp for UI display
+    const cachedResponse = {
+      data,
+      cachedAt: new Date().toISOString()
+    };
 
-    res.json(data);
+    // Cache for 1 hour (showtimes are static for the day)
+    cache.set(cacheKey, cachedResponse, 60 * 60 * 1000);
+
+    res.json(cachedResponse);
 
   } catch (error) {
     console.error('[Error] /api/showtimes:', error);
@@ -338,8 +344,8 @@ app.get('/api/seat-availability', rateLimiter, async (req, res) => {
       occupancyPercentage: totalSeats > 0 ? Math.round((occupiedSeats / totalSeats) * 100) : 0
     };
 
-    // Cache for 1 minute (seat availability changes frequently)
-    cache.set(cacheKey, enrichedData, 60 * 1000);
+    // Cache for 1 hour (seat availability doesn't need real-time updates)
+    cache.set(cacheKey, enrichedData, 60 * 60 * 1000);
 
     res.json(enrichedData);
 
@@ -381,7 +387,7 @@ app.listen(PORT, () => {
   console.log(`✓ Server running on http://localhost:${PORT}`);
   console.log(`✓ API Key configured: ${API_KEY.substring(0, 8)}...`);
   console.log(`✓ Rate limit: 500 requests/minute per IP`);
-  console.log(`✓ Cache: 5min (theatres), 2min (showtimes), 1min (seats)`);
+  console.log(`✓ Cache: 6hr (theatres), 1hr (showtimes), 1hr (seats)`);
   console.log('='.repeat(60));
   console.log('\nEndpoints:');
   console.log(`  GET  /health                - Health check`);

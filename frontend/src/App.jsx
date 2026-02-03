@@ -13,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [progress, setProgress] = useState({ stage: '', current: 0, total: 0 });
+  const [cacheTimestamp, setCacheTimestamp] = useState(null);
 
   function getTodayDate() {
     const today = new Date();
@@ -33,6 +34,23 @@ function App() {
   function formatDateForAPI(inputDate) {
     const [year, month, day] = inputDate.split('-');
     return `${parseInt(month)}/${parseInt(day)}/${year}`;
+  }
+
+  function getTimeAgo(timestamp) {
+    if (!timestamp) return null;
+    
+    const now = new Date();
+    const cached = new Date(timestamp);
+    const diffMs = now - cached;
+    const diffMins = Math.floor(diffMs / 60000);
+    
+    if (diffMins < 1) return 'just now';
+    if (diffMins === 1) return '1 minute ago';
+    if (diffMins < 60) return `${diffMins} minutes ago`;
+    
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours === 1) return '1 hour ago';
+    return `${diffHours} hours ago`;
   }
 
   useEffect(() => {
@@ -102,13 +120,26 @@ function App() {
       // Step 3: Process and aggregate showtimes
       console.log('Processing showtimes...');
       const allSessions = [];
+      let latestCacheTimestamp = null;
 
       showtimeResults.forEach((result) => {
         if (!result.success || !result.showtimes || result.showtimes.length === 0) {
           return;
         }
 
-        result.showtimes.forEach((theatreData) => {
+        // Extract cache timestamp from response
+        const response = result.showtimes;
+        if (response.cachedAt) {
+          if (!latestCacheTimestamp || new Date(response.cachedAt) > new Date(latestCacheTimestamp)) {
+            latestCacheTimestamp = response.cachedAt;
+          }
+        }
+
+        // Use response.data if it's wrapped, otherwise use response directly
+        const showtimeData = response.data || response;
+        const theatresArray = Array.isArray(showtimeData) ? showtimeData : [showtimeData];
+
+        theatresArray.forEach((theatreData) => {
           const theatreId = theatreData.theatreId;
           const theatreName = theatreData.theatre;
 
@@ -140,6 +171,9 @@ function App() {
           });
         });
       });
+
+      // Set cache timestamp for UI display
+      setCacheTimestamp(latestCacheTimestamp);
 
       if (allSessions.length === 0) {
         setError('No showtimes found for the selected date at nearby theatres.');
@@ -342,6 +376,11 @@ function App() {
                     {movies.length > 0 && (
                       <>
                         {' '}• Showing <strong>{movies.length}</strong> movie{movies.length !== 1 ? 's' : ''}
+                      </>
+                    )}
+                    {cacheTimestamp && (
+                      <>
+                        {' '}• <span className="cache-timestamp">Updated {getTimeAgo(cacheTimestamp)}</span>
                       </>
                     )}
                   </p>

@@ -166,6 +166,12 @@
   font-weight: 700;
 }
 
+.cache-timestamp {
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
 .movies-section {
   margin-top: 1.5rem;
 }
